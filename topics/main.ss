@@ -1,16 +1,39 @@
-? how * (add|make|create) [a|an|the] *1 *
+? how * (add|make|create) * (block|text|image) *
 - ^respond(add)
 
+? what * (block|text|image|horizontal|vertical) *
+- ^respond(block)
+
++ *
+- ^respond(any)
+
 > topic:system:keep add
-  + __sure__
-  - Sure just add
-  - Yeah, I just do
 
-  + * Text *
-  - {@__sure__} in vertical Text
-  - {@__sure__} in horizontal Text
+  + how * (add|make|create) * text *
+  - To add block text you need to do this
 
-  + * Image *
-  - {@__sure__} Image
+  + how * (add|make|create) * image *
+  - To add an image block you need to put this
+
+< topic
+
+> topic:system:keep block
+	
+	+ what * text *
+	- A text block is thing
+
+	+ what * block *
+	- A block is this thing
+
+	+ what * image *
+	- An image block is this thing
+
+< topic
+
+> topic:system:keep any
+
+	+ *
+	- uuuu nice
+	- hey now
 
 < topic
