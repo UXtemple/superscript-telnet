@@ -1,0 +1,197 @@
+{
+    "topics": {
+        "onboarding": {
+            "name": "onboarding",
+            "flags": {},
+            "keywords": [],
+            "filter": null,
+            "gambits": [
+                "6aOebbwZ",
+                "YWJNpmUj",
+                "0t6ztdcm",
+                "GTGXYBJO"
+            ]
+        },
+        "onboarding_designer": {
+            "name": "onboarding_designer",
+            "flags": {
+                "system": true
+            },
+            "keywords": [],
+            "filter": null,
+            "gambits": [
+                "Ps3pVNcX"
+            ]
+        },
+        "onboarding_developer": {
+            "name": "onboarding_developer",
+            "flags": {
+                "system": true
+            },
+            "keywords": [],
+            "filter": null,
+            "gambits": [
+                "7FPEQ9bJ"
+            ]
+        },
+        "random": {
+            "name": "random",
+            "flags": {
+                "keep": "keep"
+            },
+            "keywords": [],
+            "filter": null,
+            "gambits": [
+                "sYnUqeCc"
+            ]
+        }
+    },
+    "gambits": {
+        "6aOebbwZ": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "onboarding",
+                "clean": "onboarding"
+            },
+            "replies": [
+                "H2tRrjPJ"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding"
+        },
+        "YWJNpmUj": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "[my name is] *1",
+                "clean": "(?:\\s*my name is\\s*|\\s*)\\s*((?:[^\\s]+\\s+){0,0}(?:[^\\s]+))\\s*"
+            },
+            "replies": [
+                "CoVMC9Eo"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding"
+        },
+        "0t6ztdcm": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "* designer",
+                "clean": "(?:(?:^|\\s)(?:.*)(?:\\s|$))?designer"
+            },
+            "replies": [
+                "HiurLTWF"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding"
+        },
+        "GTGXYBJO": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "* developer",
+                "clean": "(?:(?:^|\\s)(?:.*)(?:\\s|$))?developer"
+            },
+            "replies": [
+                "m6CtjDMo"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding"
+        },
+        "Ps3pVNcX": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "__start__",
+                "clean": "__start__"
+            },
+            "replies": [
+                "iJghYxh9"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding_designer"
+        },
+        "7FPEQ9bJ": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "__start__",
+                "clean": "__start__"
+            },
+            "replies": [
+                "Zb7aYvPJ"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "onboarding_developer"
+        },
+        "sYnUqeCc": {
+            "trigger": {
+                "flags": {},
+                "filter": null,
+                "question": false,
+                "raw": "what is a *1",
+                "clean": "what is a\\s*((?:[^\\s]+\\s+){0,0}(?:[^\\s]+))\\s*"
+            },
+            "replies": [
+                "Y748uXjc"
+            ],
+            "conditional": null,
+            "conversation": null,
+            "topic": "random"
+        }
+    },
+    "replies": {
+        "H2tRrjPJ": {
+            "string": "hey I’m Ash, how should I call you?",
+            "filter": null,
+            "keep": false
+        },
+        "CoVMC9Eo": {
+            "string": "hey, <cap1>. Are you a designer or a developer? ^save('name', <cap1>)",
+            "filter": null,
+            "keep": false
+        },
+        "HiurLTWF": {
+            "string": "^topicRedirect('onboarding_designer', '__start__')",
+            "filter": null,
+            "keep": false
+        },
+        "m6CtjDMo": {
+            "string": "^topicRedirect('onboarding_developer', '__start__')",
+            "filter": null,
+            "keep": false
+        },
+        "iJghYxh9": {
+            "string": "hi designer!",
+            "filter": null,
+            "keep": false
+        },
+        "Zb7aYvPJ": {
+            "string": "Let's start with some code\\n^code('horizontal')",
+            "filter": null,
+            "keep": false
+        },
+        "Y748uXjc": {
+            "string": "^code(<cap1>)",
+            "filter": null,
+            "keep": false
+        }
+    },
+    "checksums": {
+        "./chat/main.ss": "7ab1b79a47a5b68a88ade8c31e2a41fb830d4b48"
+    },
+    "version": 1
+}

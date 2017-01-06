@@ -1,17 +1,15 @@
 // Run this and then telnet to localhost:2000 and chat with the bot
 
-var net             = require("net");
-var superscript     = require("superscript");
-var mongoose        = require("mongoose");
-var facts           = require("sfacts");
-var factSystem      = facts.create('telnetFacts');
+var net = require("net");
+var superscript = require("superscript").default;
+var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/telnetbot');
 
 var options = {};
 var sockets = [];
 
-options['factSystem'] = factSystem;
 options['mongoose'] = mongoose;
+options.importFile = "./data.json";
 
 var botHandle = function(err, bot) {
     
@@ -32,6 +30,11 @@ var botHandle = function(err, bot) {
       // Find the right socket
       var i = sockets.indexOf(socket);
       var soc = sockets[i];
+
+      if (err) {
+        console.error('error', err)
+        soc.write(`ERROR: ${err.message}\n`)
+      }
 
       soc.write("\nBot> " + reply.string + "\n");
       soc.write("You> ");
@@ -84,6 +87,6 @@ var botHandle = function(err, bot) {
 
 
 // Main entry point
-new superscript(options, function(err, botInstance){
+superscript.setup(options, function(err, botInstance){
   botHandle(null, botInstance);
 });

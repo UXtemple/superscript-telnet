@@ -4,9 +4,10 @@
   "description": "A bot boilerplate to use for getting started with SuperScript",
   "main": "index.js",
   "scripts": {
-    "start": "mongod & node ./telnet.js",
+    "start": "./node_modules/.bin/parse -f && npm run run",
+    "run": "mongod & DEBUG=* DEBUG_LEVEL=verbose node ./telnet.js",
     "join": "rlwrap telnet 127.0.0.1 2000",
-    "reload": "./node_modules/superscript/bin/cleanup.js --mongo telnetbot",
+    "reload": "./node_modules/.bin/parse -f && ./node_modules/.bin/cleanup --mongo telnetbot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +26,6 @@
   "dependencies": {
     "mongoose": "^4.4.5",
     "sfacts": "^0.2.1",
-    "superscript": "^0.12.2"
+    "superscript": "alpha"
   }
 }
