@@ -4,8 +4,7 @@
   "description": "A bot boilerplate to use for getting started with SuperScript",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/parse -f && npm run run",
-    "run": "mongod & DEBUG=* DEBUG_LEVEL=verbose node ./telnet.js",
+    "start": "mongod & DEBUG=* DEBUG_LEVEL=verbose node ./telnet.js",
     "join": "rlwrap telnet 127.0.0.1 2000",
     "reload": "./node_modules/.bin/parse -f && ./node_modules/.bin/cleanup --mongo telnetbot",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,6 +23,7 @@
   },
   "homepage": "https://github.com/silentrob/hello-superscript#readme",
   "dependencies": {
+    "chokidar": "^1.6.1",
     "mongoose": "^4.4.5",
     "sfacts": "^0.2.1",
     "superscript": "alpha"

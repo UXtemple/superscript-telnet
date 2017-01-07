@@ -1,7 +1,7 @@
 > topic onboarding
 
 + onboarding
-- hey I’m Ash, how should I call you?
+- hi I’m Ash, how should I call you?
 
   + [my name is] *1
   - hey, <cap1>. Are you a designer or a developer? ^save('name', <cap1>)

@@ -6,10 +6,10 @@
             "keywords": [],
             "filter": null,
             "gambits": [
-                "6aOebbwZ",
-                "YWJNpmUj",
-                "0t6ztdcm",
-                "GTGXYBJO"
+                "4CZEdUH7",
+                "6jByKawu",
+                "EPNGUxqe",
+                "FZAOZgck"
             ]
         },
         "onboarding_designer": {
@@ -20,7 +20,7 @@
             "keywords": [],
             "filter": null,
             "gambits": [
-                "Ps3pVNcX"
+                "s5Y1Q9ZL"
             ]
         },
         "onboarding_developer": {
@@ -31,7 +31,7 @@
             "keywords": [],
             "filter": null,
             "gambits": [
-                "7FPEQ9bJ"
+                "S2d13rQq"
             ]
         },
         "random": {
@@ -42,12 +42,12 @@
             "keywords": [],
             "filter": null,
             "gambits": [
-                "sYnUqeCc"
+                "6VClLHF3"
             ]
         }
     },
     "gambits": {
-        "6aOebbwZ": {
+        "4CZEdUH7": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -56,13 +56,13 @@
                 "clean": "onboarding"
             },
             "replies": [
-                "H2tRrjPJ"
+                "nYi9v1e2"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding"
         },
-        "YWJNpmUj": {
+        "6jByKawu": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -71,13 +71,13 @@
                 "clean": "(?:\\s*my name is\\s*|\\s*)\\s*((?:[^\\s]+\\s+){0,0}(?:[^\\s]+))\\s*"
             },
             "replies": [
-                "CoVMC9Eo"
+                "ePO1esA8"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding"
         },
-        "0t6ztdcm": {
+        "EPNGUxqe": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -86,13 +86,13 @@
                 "clean": "(?:(?:^|\\s)(?:.*)(?:\\s|$))?designer"
             },
             "replies": [
-                "HiurLTWF"
+                "Ip6OwoPt"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding"
         },
-        "GTGXYBJO": {
+        "FZAOZgck": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -101,13 +101,13 @@
                 "clean": "(?:(?:^|\\s)(?:.*)(?:\\s|$))?developer"
             },
             "replies": [
-                "m6CtjDMo"
+                "ZAq4o0Ed"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding"
         },
-        "Ps3pVNcX": {
+        "s5Y1Q9ZL": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -116,13 +116,13 @@
                 "clean": "__start__"
             },
             "replies": [
-                "iJghYxh9"
+                "QetXRc7y"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding_designer"
         },
-        "7FPEQ9bJ": {
+        "S2d13rQq": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -131,13 +131,13 @@
                 "clean": "__start__"
             },
             "replies": [
-                "Zb7aYvPJ"
+                "b4qoqA1B"
             ],
             "conditional": null,
             "conversation": null,
             "topic": "onboarding_developer"
         },
-        "sYnUqeCc": {
+        "6VClLHF3": {
             "trigger": {
                 "flags": {},
                 "filter": null,
@@ -146,7 +146,7 @@
                 "clean": "what is a\\s*((?:[^\\s]+\\s+){0,0}(?:[^\\s]+))\\s*"
             },
             "replies": [
-                "Y748uXjc"
+                "kSq3KGQX"
             ],
             "conditional": null,
             "conversation": null,
@@ -154,44 +154,44 @@
         }
     },
     "replies": {
-        "H2tRrjPJ": {
-            "string": "hey I’m Ash, how should I call you?",
+        "nYi9v1e2": {
+            "string": "hi I’m Ash, how should I call you?",
             "filter": null,
             "keep": false
         },
-        "CoVMC9Eo": {
+        "ePO1esA8": {
             "string": "hey, <cap1>. Are you a designer or a developer? ^save('name', <cap1>)",
             "filter": null,
             "keep": false
         },
-        "HiurLTWF": {
+        "Ip6OwoPt": {
             "string": "^topicRedirect('onboarding_designer', '__start__')",
             "filter": null,
             "keep": false
         },
-        "m6CtjDMo": {
+        "ZAq4o0Ed": {
             "string": "^topicRedirect('onboarding_developer', '__start__')",
             "filter": null,
             "keep": false
         },
-        "iJghYxh9": {
+        "QetXRc7y": {
             "string": "hi designer!",
             "filter": null,
             "keep": false
         },
-        "Zb7aYvPJ": {
+        "b4qoqA1B": {
             "string": "Let's start with some code\\n^code('horizontal')",
             "filter": null,
             "keep": false
         },
-        "Y748uXjc": {
+        "kSq3KGQX": {
             "string": "^code(<cap1>)",
             "filter": null,
             "keep": false
         }
     },
     "checksums": {
-        "./chat/main.ss": "7ab1b79a47a5b68a88ade8c31e2a41fb830d4b48"
+        "/Users/craverod/pages/ash-superscript/chat/main.ss": "4f8982afe82928a551055023d65656f4f774ad20"
     },
     "version": 1
 }

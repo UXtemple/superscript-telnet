@@ -1,92 +1,104 @@
 // Run this and then telnet to localhost:2000 and chat with the bot
 
-var net = require("net");
-var superscript = require("superscript").default;
-var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/telnetbot');
+const chokidar = require('chokidar')
+const net = require('net')
+const superscript = require('superscript').default
+const mongoose = require('mongoose')
+const fs = require('fs')
+const parser = require('ss-parser').default
 
-var options = {};
-var sockets = [];
+let sockets = []
+let bot = null
 
-options['mongoose'] = mongoose;
-options.importFile = "./data.json";
+function receiveData(socket, data) {
+  // Handle incoming messages.
+  let message = '' + data
 
-var botHandle = function(err, bot) {
-    
-  var receiveData = function(socket, bot, data) {
-    // Handle incoming messages.
-    var message = "" + data;
+  message = message.replace(/[\x0D\x0A]/g, '')
 
-    message = message.replace(/[\x0D\x0A]/g, "");
+  if (message.indexOf('/quit') === 0 || data.toString('hex',0,data.length) === 'fff4fffd06') {
+    socket.end('Good-bye!\n')
+    return
+  }
 
-    if (message.indexOf("/quit") === 0 || data.toString('hex',0,data.length) === "fff4fffd06") {
-      socket.end("Good-bye!\n");
-      return;
+  if (!bot) {
+    socket.write(`Ash> I'm not ready yet.`)
+    return
+  }
+
+  // Use the remoteIP as the name since the PORT changes on ever new connection.
+  bot.reply(socket.remoteAddress, message.trim(), function(err, reply) {
+    if (err) {
+      console.error('error', err)
+      socket.write(`ERROR: ${err.message}\n`)
     }
 
-    // Use the remoteIP as the name since the PORT changes on ever new connection.
-    bot.reply(socket.remoteAddress, message.trim(), function(err, reply){
+    socket.write('\nAsh> ' + reply.string + '\n')
+    socket.write('You> ')
+  })
+}
 
-      // Find the right socket
-      var i = sockets.indexOf(socket);
-      var soc = sockets[i];
+function closeSocket(socket) {
+  sockets = sockets.filter(s => s !== socket)
+  console.log(`- user ${socket.name}\n`)
+}
 
-      if (err) {
-        console.error('error', err)
-        soc.write(`ERROR: ${err.message}\n`)
-      }
+function newSocket(socket) {
+  socket.name = socket.remoteAddress + ':' + socket.remotePort
+  console.log(`+ user ${socket.name}\n`)
 
-      soc.write("\nBot> " + reply.string + "\n");
-      soc.write("You> ");
+  sockets.push(socket)
 
-    });
-  };
+  socket.write(`Ash> Hi ${socket.name}! Type /quit to disconnect.\n`)
+  socket.write('You> ')
 
-  var closeSocket = function(socket, bot) {
-    var i = sockets.indexOf(socket);
-    var soc = sockets[i];
+  socket.on('data', data => receiveData(socket, data))
+  socket.on('end', () => closeSocket(socket))
+}
 
-    console.log("User '" + soc.name + "' has disconnected.\n");
+// Start the TCP server.
+const server = net.createServer(newSocket)
 
-    if (i != -1) {
-      sockets.splice(i, 1);
-    }
-  };
+const options = {
+  importFile: './data.json',
+  mongoose: mongoose.connect('mongodb://localhost/telnetbot')
+}
 
-  var newSocket = function (socket) {
-    socket.name = socket.remoteAddress + ":" + socket.remotePort;
-    console.log("User '" + socket.name + "' has connected.\n");
+server.listen(2000)
+console.log('Server ready. Join with npm run join.')
 
-    sockets.push(socket);
-    
-    // Send a welcome message.
-    socket.write('Welcome to the Telnet server!\n');
-    socket.write("Hello " + socket.name + "! " + "Type /quit to disconnect.\n\n");
+function fail(error) {
+  console.error(`x: ${err}`)
+  sockets.forEach(socket => socket.write(`x: ${error.toString()}`))
+}
 
+function build(done) {
+  console.log('.')
+  sockets.forEach(socket => socket.write('.'))
 
-    // Send their prompt.
-    socket.write("You> ");
+  parser.parseDirectory(`${__dirname}/chat`, (err, result) => {
+    if (err) return fail(err)
 
-    socket.on('data', function(data) {
-      receiveData(socket, bot, data);
-    });
+    fs.writeFile(options.importFile, JSON.stringify(result, null, 4), (err) => {
+      if (err) return fail(err)
+      done()
+    })
+  })
+}
+function ready() {
+  console.log('!')
+  sockets.forEach(socket => socket.write('!\nYou> '))
+}
 
-    // Handle disconnects.
-    socket.on('end', function() {
-      closeSocket(socket, bot);
-    });
+chokidar.watch(__dirname, {ignored: /(^|[\/\\])\../}).on('all', () => {
+  build(() => {
 
-  };
+    // Main entry point
+    superscript.setup(options, (error, next) => {
+      if (error) return fail(error)
+      ready()
+      bot = next
+    })
 
-  // Start the TCP server.
-  var server = net.createServer(newSocket);
-
-  server.listen(2000);
-  console.log("TCP server running on port 2000.\n");
-};
-
-
-// Main entry point
-superscript.setup(options, function(err, botInstance){
-  botHandle(null, botInstance);
-});
+  })
+})
