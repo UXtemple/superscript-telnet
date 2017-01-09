@@ -1,0 +1,3 @@
+exports[`onboarding should onboard designers 1`] = `Promise {}`;
+
+exports[`onboarding should onboard developers 1`] = `Promise {}`;
